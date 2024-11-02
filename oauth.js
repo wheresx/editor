@@ -9,6 +9,7 @@ const loginResultDiv = document.querySelector('#login-result');
 async function getAccessTokenFromCode(code) {
     console.log('Got the code', code);
 
+    loginResultDiv.textContent = 'Waiting for auth server...';
     let data = await fetch(`https://gh-oauth-server.onrender.com/api/${clientId}/${code}`)
     data = await data.json();
 

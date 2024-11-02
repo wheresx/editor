@@ -86,12 +86,12 @@ function renderTable() {
 
         // Delete button
         const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
+        deleteButton.textContent = 'X';
         deleteButton.onclick = () => deleteRow(i);
 
         // Duplicate button
         const duplicateButton = document.createElement('button');
-        duplicateButton.textContent = 'Duplicate';
+        duplicateButton.textContent = 'Copy';
         duplicateButton.onclick = () => duplicateRow(i);
 
         actionCell.appendChild(deleteButton);
