@@ -24,11 +24,29 @@ async function fetchFromGitHub(url, options = {}) {
     return response.json();
 }
 
+function parseCSVLine(line) {
+    const fields = [];
+    let field = '';
+    let inQuotes = false;
+    [...line].forEach(char => {
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            fields.push(field.trim());
+            field = '';
+        } else {
+            field += char;
+        }
+    });
+    fields.push(field.trim());
+    return fields;
+}
+
 function parseCSV(content) {
     return content.split('\n')
         .map(line => line.trim())
         .filter(line => line)
-        .map(line => line.split(',').map(cell => cell.trim()));
+        .map(parseCSVLine);
 }
 
 function renderTable() {
@@ -192,7 +210,14 @@ function deleteRow(rowIndex) {
 }
 
 function rowToCSV(row) {
-    return row.map(cell => cell.includes(',') ? `"${cell}"` : cell).join(',');
+    return row.map(field => {
+        // Quote if field contains comma, quote, or whitespace at edges
+        if (field.includes(',') || field.includes('"') || /^\s|\s$/.test(field)) {
+            // Escape quotes by doubling them
+            return `"${field.replace(/"/g, '""')}"`;
+        }
+        return field;
+    }).join(',');
 }
 
 async function saveChanges() {
@@ -233,7 +258,7 @@ function logout() {
     originalSha = '';
     document.getElementById('login-section').classList.remove('hidden');
     document.getElementById('editor-section').classList.add('hidden');
-    loginResultDiv.textContent = 'Logged out.';
+    loginResultDiv.textContent = 'Logged out';
 }
 
 
