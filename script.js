@@ -233,6 +233,7 @@ function logout() {
     originalSha = '';
     document.getElementById('login-section').classList.remove('hidden');
     document.getElementById('editor-section').classList.add('hidden');
+    loginResultDiv.textContent = 'Logged out.';
 }
 
 
