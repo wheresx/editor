@@ -196,6 +196,9 @@ function rowToCSV(row) {
 }
 
 async function saveChanges() {
+    if (!confirm('Commit changes to GitHub?')) {
+        return;
+    }
     try {
         const csvContent = csvData
             .map(rowToCSV)
