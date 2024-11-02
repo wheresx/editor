@@ -20,7 +20,7 @@ async function getAccessTokenFromCode(code) {
 }
 
 function loginWithGithub() {
-    const redirectUri = window.location.origin + '/';
+    const redirectUri = window.location.origin + window.location.pathname + '/';
     const scope = 'repo';
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
 }
