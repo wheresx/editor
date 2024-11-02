@@ -1,0 +1,38 @@
+#app, #editor-section, #login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f4f4f4;
+}
+.editable:hover {
+    background-color: #f0f0f0;
+}
+button {
+    margin: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+#controls {
+    margin: 20px 0;
+}
+.hidden {
+    display: none !important;
+}
+.loading {
+    color: #666;
+    font-style: italic;
+}

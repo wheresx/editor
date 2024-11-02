@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where is Davis Editor</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Where is Davis Editor</h1>
+        <div id="login-section">
+            <button onclick="loginWithGithub()">Login with GitHub</button>
+            <div id="login-result"></div>
+        </div>
+
+        <!-- Editor Section (hidden initially) -->
+        <div id="editor-section" class="hidden">
+            <div id="user-info"></div>
+            <div id="table-container"></div>
+            <div id="controls">
+                <button onclick="addRow()">Add Row</button>
+                <button onclick="saveChanges()" id="save-button">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/oauth.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
