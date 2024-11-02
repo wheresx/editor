@@ -39,12 +39,12 @@ function renderTable() {
     // Create header row
     const thead = document.createElement('thead');
     const headerRow = document.createElement('tr');
-    
+
     // Add drag handle column
     const dragHandleHeader = document.createElement('th');
     dragHandleHeader.style.width = '30px';
     headerRow.appendChild(dragHandleHeader);
-    
+
     headers.forEach(header => {
         const th = document.createElement('th');
         th.textContent = header;
@@ -57,19 +57,19 @@ function renderTable() {
     // Create data rows
     const tbody = document.createElement('tbody');
     tbody.setAttribute('id', 'sortable-tbody');
-    
+
     for (let i = 1; i < csvData.length; i++) {
         const row = document.createElement('tr');
         row.setAttribute('draggable', 'true');
         row.dataset.index = i;
-        
+
         // Add drag handle
         const dragHandle = document.createElement('td');
         dragHandle.innerHTML = '⋮⋮'; // Vertical dots as drag handle
         dragHandle.className = 'drag-handle';
         dragHandle.style.cursor = 'move';
         row.appendChild(dragHandle);
-        
+
         // Add data cells
         csvData[i].forEach((cell, cellIndex) => {
             const td = document.createElement('td');
@@ -83,17 +83,17 @@ function renderTable() {
         // Add action buttons
         const actionCell = document.createElement('td');
         actionCell.className = 'action-buttons';
-        
+
         // Delete button
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.onclick = () => deleteRow(i);
-        
+
         // Duplicate button
         const duplicateButton = document.createElement('button');
         duplicateButton.textContent = 'Duplicate';
         duplicateButton.onclick = () => duplicateRow(i);
-        
+
         actionCell.appendChild(deleteButton);
         actionCell.appendChild(duplicateButton);
         row.appendChild(actionCell);
@@ -106,7 +106,7 @@ function renderTable() {
 
         tbody.appendChild(row);
     }
-    
+
     table.appendChild(tbody);
     container.innerHTML = '';
     container.appendChild(table);
@@ -156,14 +156,14 @@ function handleDragOver(e) {
 function handleDrop(e) {
     e.preventDefault();
     const dragEndIndex = parseInt(e.target.closest('tr').dataset.index);
-    
+
     if (dragStartIndex !== null && dragEndIndex !== dragStartIndex) {
         // Move the row in the data array
         const [movedRow] = csvData.splice(dragStartIndex, 1);
         csvData.splice(dragEndIndex, 0, movedRow);
         renderTable();
     }
-    
+
     dragStartIndex = null;
 }
 

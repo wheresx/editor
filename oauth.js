@@ -20,7 +20,7 @@ async function getAccessTokenFromCode(code) {
 }
 
 function loginWithGithub() {
-    const redirectUri = window.location.origin + window.location.pathname + '/';
+    const redirectUri = window.location.origin + window.location.pathname;
     const scope = 'repo';
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
 }
@@ -32,7 +32,7 @@ async function onload() {
         await afterAuth();
 
     } else if (code) {
-        window.history.replaceState({}, document.title, '/');
+        window.history.replaceState({}, document.title, window.location.pathname);
         try {
             access_token = await getAccessTokenFromCode(code);
         } catch (error) {
