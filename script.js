@@ -253,11 +253,17 @@ async function initializeEditor() {
     document.getElementById('editor-section').classList.remove('hidden');
 
     // Get user info
-    const userInfo = await fetchFromGitHub('https://api.github.com/user');
-    document.getElementById('user-info').innerHTML = `
-        User: ${userInfo.login}
-        <button onclick="logout()">Logout</button>
-    `;
+    try {
+        const userInfo = await fetchFromGitHub('https://api.github.com/user');
+        document.getElementById('user-info').innerHTML = `
+            User: ${userInfo.login}
+            <button onclick="logout()">Logout</button>
+        `;
+    } catch (error) {
+        logout();
+        loginResultDiv.textContent = 'Error fetching user info: ' + error.message;
+        return;
+    }
 
     await loadCSVFile();
 }
